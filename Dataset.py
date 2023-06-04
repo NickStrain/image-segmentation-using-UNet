@@ -15,8 +15,8 @@ class dataset(Dataset):
         return len(self.image)
 
     def __getitem__(self, index):
-        image_path = os.path.join(self.image_dir,self.image[index])
-        mask_path = os.path.join(self.mask_path,self.image[index].replace('. jpg','_mask.gif'))
+        image_path = os.path.join(self.image_path, self.image[index])
+        mask_path = os.path.join(self.mask_path,self.image[index].replace('.jpg','_mask.gif'))
         image = np.array(Image.open(image_path).convert('RGB'))
         mask = np.array(Image.open(mask_path).convert('L'))
         mask[mask == 255.0] = 1.0
@@ -26,3 +26,4 @@ class dataset(Dataset):
             image = agumentation['image']
             mask = agumentation['mask']
         return image,mask
+
